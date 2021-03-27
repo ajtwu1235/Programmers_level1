@@ -5,7 +5,7 @@ public class Delivery {
         int answer = 0;
         int[][] map =new int[N][N];
         
-        //모든 map값의 INF값을 넣는다.(플로이드 와샬 쓰기위해) map[정점][정점]은 0으로초기화
+        //모든 map값의 INF값을 넣는다.(플로이드 와샬 쓰기위해) map[정점][같은정점]은 0으로초기화
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
                 if (i == j){                                  
@@ -14,7 +14,7 @@ public class Delivery {
                 map[i][j] = 500001;  
             }
         }
-        // 정점과 정점을 연결해주는 맵을 그린다. 
+        // 정점과 정점을 연결해주는 다리를 맵에 그린다. 
         for(int[] data:road){
             //새로운 다리가 기존에 있던 다리보다 크면 넘긴다. 작으면 갱신한다. 
             if(map[data[0]-1][data[1]-1]<data[2]){
@@ -23,7 +23,7 @@ public class Delivery {
             map[data[0]-1][data[1]-1]=data[2];
             map[data[1]-1][data[0]-1]=data[2];
         }
-        //플로이드 와샬 : 정점과 정점 사이의 최소거리를 구해주는 알고리즘
+        //플로이드 와샬 : 정점과 다른 정점 사이의 최소거리를 구해주는 알고리즘
         for(int i=0; i<map.length; i++) {
 			for(int j=0; j<map.length; j++) {
 				for(int k=0; k<map.length; k++) {
